@@ -22,8 +22,8 @@ public class Collector {
     private int correlationId = 0;
 
     @ReleaseStrategy
-    public boolean isReadytoRelease(List<Message> messages) {
-        if (messages.size() == 1000) {
+    public boolean isReadytoRelease(List<Message<String>> messages) {
+        if (messages.size() == 2) {
             correlationId++;
             return true;
         }
@@ -37,21 +37,20 @@ public class Collector {
     }
 
     @Aggregator(inputChannel = SampleCollector.INPUT, outputChannel = SampleCollector.OUTPUT, discardChannel = "nullChannel")
-    public String receive(List<Message> messages) {
+    public List<String> receive(List<Message<String>> messages) {
 
         System.out.println("******************");
         System.out.println("At the collector");
         System.out.println("******************");
         System.out.print(messages);
 
-        SimpleMessageGroup msgrp = new SimpleMessageGroup(correlationId);
+        List<String> fooMessages = new ArrayList<>();
 
         for (Message message : messages) {
-            Message newMessage = new GenericMessage(message.getPayload());
-            msgrp.add(newMessage);
+            fooMessages.add(message.getPayload().toString());
         }
 
-        return msgrp.toString();
+        return fooMessages;
     }
 
 
