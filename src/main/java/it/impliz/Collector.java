@@ -23,7 +23,7 @@ public class Collector {
 
     @ReleaseStrategy
     public boolean isReadytoRelease(List<Message<String>> messages) {
-        if (messages.size() == 2) {
+        if (messages.size() == 20) {
             correlationId++;
             return true;
         }
