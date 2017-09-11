@@ -16,6 +16,9 @@ import org.springframework.messaging.support.GenericMessage;
 import java.util.ArrayList;
 import java.util.List;
 
+
+//TODO investigate: https://github.com/spring-cloud-stream-app-starters/aggregator/tree/master/spring-cloud-starter-stream-processor-aggregator
+
 @EnableBinding(Collector.SampleCollector.class)
 public class Collector {
 
